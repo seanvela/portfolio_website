@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas
 
 st.set_page_config(layout='wide')
 
@@ -33,10 +34,46 @@ with col2:
     # HTML content with the custom class
     content2 = """
     <div class="info-bubble">
-    Below you can find some apps that I have built in Python and Javascript. Feel free to contact me!
+    Below you can find some apps that I have built. Feel free to contact me!
     </div>
     """
 
     # Render the custom CSS and HTML content in Streamlit
     st.markdown(custom_css, unsafe_allow_html=True)
     st.markdown(content2, unsafe_allow_html=True)
+
+    # contact information
+    st.header('Get in Touch')
+    st.write("""
+    Click the links below!
+    """)
+
+    # Email, GitHub, and LinkedIn links with icons
+    st.markdown("""
+    <div style="display: flex; justify-content: space-around;">
+        <a href="https://www.linkedin.com/in/seanvela1514" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" alt="LinkedIn" style="width:60px;height:60px;">
+        </a>     
+        <a href="https://github.com/seanvela" target="_blank">
+            <img src="https://img.icons8.com/ios-glyphs/50/000000/github.png" alt="GitHub" style="width:60px;height:60px;">
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])
+
+df = pandas.read_csv('data.csv', sep=';')
+with col3:
+    for index, row in df[:10].iterrows():
+        st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row["image"])
+        st.write(f"[Source code]({row['url']})")
+
+with col4:
+    for index, row in df[10:].iterrows():
+        st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row["image"])
+        st.write(f"[Source code]({row['url']})")
