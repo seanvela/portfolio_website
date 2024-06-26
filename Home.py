@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas
+import os
 
 st.set_page_config(layout='wide')
 
@@ -12,7 +13,7 @@ with col2:
     st.title('Sean Vela')
 
     content = """
-    Hi, I am Sean Vela! I am a junior software engineer focused on backend development,  transitioning from a career in mechanical engineering to software engineering, with a strong skill set in building scalable solutions and optimizing code for efficiency and reliability. Committed to tackling complex technical challenges and delivering high-quality software solutions. Proficient in multiple programming languages and frameworks. I am passionate about continuous learning and contributing to a team.
+    Hi, I am Sean Vela! I am a junior software engineer focused on backend development,  transitioning from a career in mechanical engineering to software engineering, with a strong skill set in building scalable solutions and optimizing code for efficiency and reliability. Committed to tackling complex technical challenges and delivering high-quality software solutions. I am proficient in multiple programming languages and frameworks. I am passionate about continuous learning and contributing to a team.
     
     I hold a Bachelor of Science in Mechanical Engineering and have recently obtained a Full Stack Development certification from the University of Texas at Austin. My diverse educational background equips me with a unique blend of analytical and technical skills, enabling me to build efficient and innovative software solutions."""
 
@@ -65,14 +66,14 @@ col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])
 
 df = pandas.read_csv('data.csv', sep=';')
 with col3:
-    for index, row in df[:10].iterrows():
+    for index, row in df[:8].iterrows():
         st.header(row["title"])
         st.write(row["description"])
         st.image("images/" + row["image"])
         st.write(f"[Source code]({row['url']})")
 
 with col4:
-    for index, row in df[10:].iterrows():
+    for index, row in df[8:].iterrows():
         st.header(row["title"])
         st.write(row["description"])
         st.image("images/" + row["image"])
